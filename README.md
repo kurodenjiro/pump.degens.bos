@@ -1,80 +1,36 @@
-# Hello NEAR Contract
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-The smart contract exposes two methods to enable storing and retrieving a greeting in the NEAR network.
+## Getting Started
 
-```ts
-@NearBindgen({})
-class HelloNear {
-  greeting: string = "Hello";
-
-  @view // This method is read-only and can be called for free
-  get_greeting(): string {
-    return this.greeting;
-  }
-
-  @call // This method changes the state, for which it cost gas
-  set_greeting({ greeting }: { greeting: string }): void {
-    // Record a log permanently to the blockchain!
-    near.log(`Saving greeting ${greeting}`);
-    this.greeting = greeting;
-  }
-}
-```
-
-<br />
-
-# Quickstart
-
-1. Make sure you have installed [node.js](https://nodejs.org/en/download/package-manager/) >= 16.
-2. Install the [`NEAR CLI`](https://github.com/near/near-cli#setup)
-
-<br />
-
-## 1. Build and Deploy the Contract
-You can automatically compile and deploy the contract in the NEAR testnet by running:
+First, run the development server:
 
 ```bash
-npm run build
-npm run deploy
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Once finished, check the `neardev/dev-account` file to find the address in which the contract was deployed:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-cat ./neardev/dev-account
-# e.g. dev-1659899566943-21539992274727
-```
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-<br />
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## 2. Retrieve the Greeting
+## Learn More
 
-`get_greeting` is a read-only method (aka `view` method).
+To learn more about Next.js, take a look at the following resources:
 
-`View` methods can be called for **free** by anyone, even people **without a NEAR account**!
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```bash
-# Use near-cli to get the greeting
-near view <dev-account> get_greeting
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-<br />
+## Deploy on Vercel
 
-## 3. Store a New Greeting
-`set_greeting` changes the contract's state, for which it is a `call` method.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-`Call` methods can only be invoked using a NEAR account, since the account needs to pay GAS for the transaction.
-
-```bash
-# Use near-cli to set a new greeting
-near call <dev-account> set_greeting '{"greeting":"howdy"}' --accountId <dev-account>
-```
-
-**Tip:** If you would like to call `set_greeting` using your own account, first login into NEAR using:
-
-```bash
-# Use near-cli to login your NEAR account
-near login
-```
-
-and then use the logged account to sign the transaction: `--accountId <your-account>`.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
