@@ -245,45 +245,57 @@ type EthersProviderContext = {
   useConnectWallet: typeof useConnectWallet;
 };
 
-const defaultEthersProviderContext: EthersProviderContext = { useConnectWallet };
+const defaultEthersProviderContext: EthersProviderContext = {
+  useConnectWallet,
+};
 
-export const useEthersProviderContext = singletonHook(defaultEthersProviderContext, () => {
-  const [{ wallet }] = useConnectWallet();
-  const [ethersProvider, setEthersProvider] = useState(defaultEthersProviderContext);
+export const useEthersProviderContext = singletonHook(
+  defaultEthersProviderContext,
+  () => {
+    const [{ wallet }] = useConnectWallet();
+    const [ethersProvider, setEthersProvider] = useState(
+      defaultEthersProviderContext
+    );
 
-  useEffect(() => {
-    (async () => {
-      if (typeof localStorage === 'undefined') return;
+    useEffect(() => {
+      (async () => {
+        if (typeof localStorage === 'undefined') return;
 
-      const walletsSub = onboard.state.select('wallets');
+        const walletsSub = onboard.state.select('wallets');
 
-      walletsSub.subscribe((wallets) => {
-        const connectedWallets = wallets.map(({ label }) => label);
-        localStorage.setItem(web3onboardKey, JSON.stringify(connectedWallets));
-      });
-
-      const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
-
-      if (previouslyConnectedWallets) {
-        // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
-        await onboard.connectWallet({
-          autoSelect: {
-            label: previouslyConnectedWallets[0],
-            disableModals: true,
-          },
+        walletsSub.subscribe((wallets) => {
+          const connectedWallets = wallets.map(({ label }) => label);
+          localStorage.setItem(
+            web3onboardKey,
+            JSON.stringify(connectedWallets)
+          );
         });
-      }
-    })();
-  }, []);
 
-  useEffect(() => {
-    if (!wallet) return;
+        const previouslyConnectedWallets = JSON.parse(
+          localStorage.getItem(web3onboardKey) || '[]'
+        );
 
-    setEthersProvider({
-      provider: wallet.provider,
-      useConnectWallet,
-    });
-  }, [wallet]);
+        if (previouslyConnectedWallets) {
+          // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
+          await onboard.connectWallet({
+            autoSelect: {
+              label: previouslyConnectedWallets[0],
+              disableModals: true,
+            },
+          });
+        }
+      })();
+    }, []);
 
-  return ethersProvider;
-});
+    useEffect(() => {
+      if (!wallet) return;
+
+      setEthersProvider({
+        provider: wallet.provider,
+        useConnectWallet,
+      });
+    }, [wallet]);
+
+    return ethersProvider;
+  }
+);

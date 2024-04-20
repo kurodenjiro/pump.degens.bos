@@ -12,14 +12,14 @@ export default function HelloComponents() {
 
   return (
     <>
-      <main className={styles.main}>
-        <div className={styles.description}>
+      <main className='flex'>
+        <div className='flex'>
           <p>
             Loading components from: &nbsp;
-            <code className={styles.code}>{socialComponents.socialDB}</code>
+            <code className='flex'>{socialComponents.socialDB}</code>
           </p>
         </div>
-        <div className={styles.center}>
+        <div className='flex text-center'>
           <h1> <code>Multi-chain</code> Components Made Simple </h1>
         </div>
         <div className='row'>
@@ -34,7 +34,7 @@ export default function HelloComponents() {
         </div>
         <hr />
 
-        <div className={styles.grid}>
+        <div className='grid grid-cols-2'>
           <DocsCard />
           <HelloNearCard />
         </div>

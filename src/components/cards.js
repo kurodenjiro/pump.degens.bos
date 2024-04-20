@@ -3,25 +3,24 @@ import styles from '../app/app.module.css';
 export const DocsCard = () => {
   return (
     <a
-      href="https://docs.near.org/develop/integrate/quickstart-frontend"
+      href='https://docs.near.org/develop/integrate/quickstart-frontend'
       className={styles.card}
       target='_blank'
-      rel="noopener noreferrer"
-    >
+      rel='noopener noreferrer'>
       <h2>
         Near Docs <span>-&gt;</span>
       </h2>
       <p>Learn how this application works, and what you can build on Near.</p>
-    </a>);
+    </a>
+  );
 };
 
 export const HelloNearCard = () => {
   return (
     <a
-      href="/hello-near"
-      className={styles.card}
-      rel="noopener noreferrer"
-    >
+      href='/hello-near'
+      className='border bg-slate-400 p-3 rounded-xl m-3'
+      rel='noopener noreferrer'>
       <h2>
         Near Integration <span>-&gt;</span>
       </h2>
@@ -33,10 +32,9 @@ export const HelloNearCard = () => {
 export const HelloComponentsCard = () => {
   return (
     <a
-      href="/hello-components"
-      className={styles.card}
-      rel="noopener noreferrer"
-    >
+      href='/hello-components'
+      className='border bg-slate-400 p-3 rounded-xl m-3'
+      rel='noopener noreferrer'>
       <h2>
         Web3 Components <span>-&gt;</span>
       </h2>

@@ -1,1 +1,51 @@
 node_modules
+# Dependencies
+node_modules/
+.yarn/cache/
+.pnp/
+
+# Build Output
+.next/
+out/
+
+# Bun specific files
+pkg/*
+pnpm-lock.yaml
+
+# IDE specific files
+.vscode/
+
+# Temporary Near Wallet Keystore
+.near-wallet.json
+
+# Text Editor Backups
+*~
+
+# Output from linters and formatters
+.eslintcache
+.stylelintcache
+
+# Ignore VS Code settings
+.vscode/settings.json
+
+# Optional: Ignore generated type definitions
+# If you don't want to commit generated type definitions, add this line
+# generated/
+
+# Ignore Tailwind CSS specific files
+# If you're using Tailwind CSS, add these lines
+tailwind.config.js
+postcss.config.js
+
+# Ignore Bootstrap CSS specific files
+# If you're using Bootstrap CSS, add this line
+node_modules/bootstrap/dist
+
+# drafts folder
+drafts/
+
+# Only include frontend code
+# If your project structure separates frontend and backend code, 
+# uncomment this line to only include frontend files
+!server.js
+!server/*
